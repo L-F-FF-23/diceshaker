@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
+        var
 
     }
 
