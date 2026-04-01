@@ -3,4 +3,6 @@
     <string name="dice_shaker">Dice Shaker</string>
     <string name="add_dice">Add Dice</string>
     <string name="clear_dices">Clear Dices</string>
+    <string name="total">Total</string>
+    <string name="start_total">0</string>
 </resources>
