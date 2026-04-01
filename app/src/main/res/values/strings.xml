@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">dice shaker</string>
+    <string name="dice_shaker">Dice Shaker</string>
+    <string name="add_dice">Add Dice</string>
 </resources>

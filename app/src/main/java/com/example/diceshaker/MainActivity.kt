@@ -11,10 +11,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kotlin.math.sqrt
+import android.widget.Button
+import android.widget.EditText
+import android.widget.GridLayout
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var container: GridLayout
     private lateinit var sensorManager: SensorManager
+    private lateinit var containerList: MutableList<Pair<Int,TextView>>
     private var accelerometer: Sensor? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +34,22 @@ class MainActivity : AppCompatActivity() {
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
-        var
+        containerList = mutableListOf<Pair<Int,TextView>>()
+        container = findViewById<GridLayout>(R.id.dice_container)
+        val addDiceButton: Button = findViewById<Button>(R.id.add_dice_button)
+        val sidesinput: EditText = findViewById<EditText>(R.id.dicesidesinput)
+        val resetButton: Button = findViewById<Button>(R.id.reset_Button)
 
+        addDiceButton.setOnClickListener {
+            if (!sidesinput.text.isEmpty() && sidesinput.text.toString() != "0"){
+                val sides = sidesinput.text.toString().toInt()
+                addDice(sides)
+            }
+        }
+        resetButton.setOnClickListener {
+            container.removeAllViews()
+            containerList.removeAll(containerList)
+        }
     }
 
     private val sensorListener = object : SensorEventListener {
@@ -53,7 +72,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun rollDice(){
-
+        for (dice in containerList) {
+            dice.second.text = (1..dice.first).random().toString()
+        }
     }
 
+    fun addDice(sidesamount: Int) {
+        val newDice = TextView(this)
+
+        newDice.text = sidesamount.toString()
+        newDice.textSize = 32f
+        newDice.setPadding(20, 5, 20, 5)
+
+        containerList.add(Pair(sidesamount,newDice))
+        updateContainerBox()
+    }
+
+    fun updateContainerBox() {
+        container.removeAllViews()
+        for (dice in containerList) {
+            container.addView(dice.second)
+        }
+    }
 }

@@ -12,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Dice Shaker"
+        android:text="@string/dice_shaker"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:id="@+id/dice_container"
+        android:id="@+id/dice_container_container"
         android:layout_width="380dp"
         android:layout_height="480dp"
         android:layout_margin="10dp"
@@ -28,32 +28,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Title">
 
-        <LinearLayout
+        <GridLayout
+            android:id="@+id/dice_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:columnCount="5" />
+
     </ScrollView>
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/dicesidesinput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:ems="10"
         android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dice_container" />
+        app:layout_constraintTop_toBottomOf="@+id/dice_container_container"
+        app:layout_constraintVertical_bias="0.26" />
 
     <Button
         android:id="@+id/add_dice_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Dice"
+        android:text="@string/add_dice"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/dicesidesinput" />
+
+    <Button
+        android:id="@+id/reset_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear Dices"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
