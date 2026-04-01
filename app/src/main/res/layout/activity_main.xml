@@ -62,9 +62,32 @@
         android:id="@+id/reset_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clear Dices"
+        android:text="@string/clear_dices"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/totalSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="Total"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dice_container_container" />
+
+    <TextView
+        android:id="@+id/totalCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="0"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/totalSign"
+        app:layout_constraintStart_toStartOf="@+id/totalSign"
+        app:layout_constraintTop_toBottomOf="@+id/totalSign" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

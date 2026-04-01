@@ -1,6 +1,7 @@
 package com.example.diceshaker
 
 
+import android.graphics.Typeface.MONOSPACE
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -15,6 +16,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.GridLayout
 import android.widget.TextView
+import androidx.constraintlayout.helper.widget.Grid
 
 class MainActivity : AppCompatActivity() {
     private lateinit var container: GridLayout
@@ -47,9 +49,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
         resetButton.setOnClickListener {
-            container.removeAllViews()
             containerList.removeAll(containerList)
+            updateContainerBox()
         }
+        sensorManager.registerListener(sensorListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     private val sensorListener = object : SensorEventListener {
@@ -75,13 +78,22 @@ class MainActivity : AppCompatActivity() {
         for (dice in containerList) {
             dice.second.text = (1..dice.first).random().toString()
         }
+        updateContainerBox()
     }
 
     fun addDice(sidesamount: Int) {
-        val newDice = TextView(this)
 
+        val newDice = TextView(this)
+        val gridLayoutParams = GridLayout.LayoutParams().apply {
+            width = 0
+            height = dpToPx(80)
+            columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+            rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+        }
+        newDice.layoutParams = gridLayoutParams
         newDice.text = sidesamount.toString()
-        newDice.textSize = 32f
+        newDice.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM)
+        newDice.setTypeface(MONOSPACE)
         newDice.setPadding(20, 5, 20, 5)
 
         containerList.add(Pair(sidesamount,newDice))
@@ -89,9 +101,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun updateContainerBox() {
+        val counter: TextView = findViewById<TextView>(R.id.totalCount)
+        var count = 0
         container.removeAllViews()
         for (dice in containerList) {
+            dice.second.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM)
+            count += dice.second.text.toString().toInt()
             container.addView(dice.second)
         }
+        counter.text = count.toString()
+    }
+
+    fun dpToPx(dp: Int): Int {
+        return (dp * resources.displayMetrics.density).toInt()
     }
 }
